@@ -1,9 +1,13 @@
-# News App Documentation
+# News App
 
-## Please read this before starting the app
+**Submitted By:**
 
-- Please create a separate branch off the main for your changes
-- Push any changes there
-- Create a pull request when you're done with your specific changes
+**Group Members:** Aaron Price and Mark Spooner
 
-#### Thanks, Aaron
+**App Description:** Allows users to search for real time news headlines as well as specific queries they might have.
+
+**Youtube Video Link:**
+
+**API's Information:** [NewsAPI](https://newsapi.org/docs/get-started#search)
+
+**Contact Email:** aprice16@terpmail.umd.edu
