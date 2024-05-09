@@ -15,10 +15,10 @@ const MONGO_URI = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.
 
 const API_URL = "https://newsapi.org/v2/everything?";
 
-function getTopHeadlines() {
+async function getTopHeadlines() {
   // TODO:
 }
 
-function getAllNews() {
+async function getAllNews() {
   //TODO:
 }
