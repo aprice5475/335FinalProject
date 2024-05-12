@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top Headlines in <%- country %></title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="main_content">
+      <% if (numOfResults > 0){ %>
+      <h1>Top Headlines in <%- country %> on <%= date %></h1>
+      <hr />
+      <% results.forEach(function(item) { %> <% if (item.name !== null) { %>
+      <h2><%=item.name %></h2>
+      <% }%>
+      <h3><%- item.title%></h3>
+      <% if (item.author !== null) { %>
+      <h4>by <%- item.author %></h4>
+      <% } %> <% if (item.urlToImage !== null){ %>
+      <img id="news-img" src="<%= item.urlToImage %>" />
+      <br />
+      <% } %> <% if (item.description) { %>
+      <p id="news-description"><%= item.description %></p>
+      <% } %>
+      <br />
+      <a href="<%- item.url %>" target="_blank" title="Click here"
+        >Read full article</a
+      >
+      <hr />
+      <% }); %> <% } else { %>
+      <h2 id="noEntries">No articles found</h2>
+      <% } %>
+      <div class="home">
+        <a href="/index">Return Home</a>
+      </div>
+    </div>
+  </body>
+</html>

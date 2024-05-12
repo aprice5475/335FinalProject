@@ -1,0 +1,96 @@
+:root {
+  --bg_clr: #222831;
+  --main_content_clr: #eeeeee;
+  --text_clr1: #2e323a;
+  --text_clr2: #76abae;
+  --text_clr3: #326ec9;
+
+  --button_radius: 0.25em;
+  --button_padding: 0.75em;
+  --width_input_border: 2px;
+  --button_font_size: 1em;
+  --select-font-size: 1.2em;
+}
+
+* {
+  color: var(--text_clr1);
+  text-transform: capitalize;
+  font-family: "Reddit Sans", sans-serif;
+  font-optical-sizing: auto;
+}
+body {
+  background-image: url("/dark-blue-background-with-the-diamond-pattern-template-sr06012408-1704699724568-cover.webp");
+  /* background-repeat: no-repeat; */
+  background-size: cover;
+  background-color: var(--bg_clr);
+}
+.main_content {
+  background-color: var(--main_content_clr);
+  opacity: 0.87;
+  width: 55%;
+  margin: 30px auto;
+  text-align: center;
+  align-items: center;
+  padding: 5rem;
+}
+.main_content a:hover {
+  color: var(--text_clr3);
+}
+
+table {
+  margin: 0 auto;
+  font-size: larger;
+}
+table,
+th,
+td {
+  border: groove 3px black;
+  border-collapse: collapse;
+}
+#noEntries {
+  font-size: x-large;
+  text-transform: capitalize;
+}
+
+.home a:hover {
+  font-size: larger;
+  color: var(--text_clr3);
+}
+input[type="submit"],
+input[type="reset"] {
+  color: var(--main_content_clr);
+  background-color: var(--text_clr3);
+  padding: var(--button_padding);
+  border-radius: var(--button_radius);
+  border: var(--width_input_border);
+  font-size: var(--button_font_size);
+}
+input[type="text"] {
+  border: var(--width_input_border);
+  border-radius: var(--button_radius);
+  width: 200px;
+  height: 30px;
+}
+form {
+  background-color: rgb(236, 236, 217);
+}
+
+#news-img {
+  width: 500px;
+}
+#news-description {
+  font-style: italic;
+}
+label strong {
+  font-size: larger;
+}
+select {
+  font-size: var(--select-font-size);
+}
+#index a {
+  font-size: larger;
+  color: var(--text_clr3);
+  &:hover {
+    color: gold;
+  }
+}

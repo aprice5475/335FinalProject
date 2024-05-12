@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search For News</title>
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main_content">
+      <h1>Search For News</h1>
+      <form action="/search" method="post">
+        <fieldset>
+          <label>
+            <input
+              type="radio"
+              name="newsType"
+              id="topHeadlinesBtn"
+              value="TopHeadlines"
+              required
+              checked
+            />
+            <strong>Top Headlines</strong>
+          </label>
+          <br />
+          <br />
+          <div class="queryArea">
+            <label>
+              <strong>Country: </strong>
+              <select name="country" id="country-list">
+                <option value="us">United States</option>
+                <option value="ca">Canada</option>
+                <option value="gb">United Kingdom</option>
+                <option value="mx">Mexico</option>
+                <option value="de">Germany</option>
+                <option value="fr">France</option>
+              </select>
+              <br />
+              <br />
+            </label>
+            <hr />
+            <label>
+              <input
+                type="radio"
+                name="newsType"
+                id="everythingBtn"
+                value="Everything"
+              />
+              <strong>Everything</strong>
+            </label>
+            <br />
+            <br />
+            <label>
+              <strong>Search: </strong>
+              <input type="text" name="query" id="query" readonly />
+            </label>
+          </div>
+          <br />
+
+          <input type="submit" value="Submit" />
+          <input type="reset" value="Reset Form" />
+        </fieldset>
+      </form>
+      <br />
+      <div class="home">
+        <a href="/index">Return Home</a>
+      </div>
+    </div>
+  </body>
+  <script>
+    const queryField = document.getElementById("query");
+    const radioButtons = document.getElementsByName("newsType");
+    let enableTextInput = false;
+    radioButtons.forEach((rb) =>
+      rb.addEventListener("change", () => {
+        enableTextInput = !enableTextInput;
+        if (enableTextInput) {
+          queryField.removeAttribute("readonly");
+        } else {
+          queryField.setAttribute("readonly", false);
+        }
+        console.log("flipped button");
+      })
+    );
+    window.onsubmit = () => {
+      if (enableTextInput) {
+        if (queryField.value === "") {
+          window.alert("You must enter a search term.");
+          return false;
+        }
+        return true;
+      }
+    };
+  </script>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Search History</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="main_content">
+      <h1>Search History</h1>
+      <% if(length === 0){ %>
+      <h2 id="noEntries">Search history is empty</h2>
+      <% }else { %> <%- table %> <% } %>
+      <hr />
+      <div class="home">
+        <a href="/index">Return Home</a>
+      </div>
+    </div>
+  </body>
+</html>
