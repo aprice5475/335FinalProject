@@ -200,6 +200,7 @@ app.post("/search", async (req, res) => {
 });
 app.get("/history", async (req, res) => {
   const result = await getHistory();
+  console.log("History Result: " + result);
   let table = "<table border = 'solid 1px'>";
   table += "<tr><th>Search History</th></tr>";
   for (e of result) {
