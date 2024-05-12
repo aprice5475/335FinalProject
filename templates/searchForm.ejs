@@ -15,7 +15,7 @@
   <body>
     <div class="main_content">
       <h1>Search For News</h1>
-      <form action="/search" method="post">
+      <form id="search-form" action="/search" method="post">
         <fieldset>
           <label>
             <input
@@ -58,7 +58,7 @@
             <br />
             <label>
               <strong>Search: </strong>
-              <input type="text" name="query" id="query" readonly />
+              <input type="text" name="query" id="query" />
             </label>
           </div>
           <br />
@@ -76,7 +76,13 @@
   <script>
     const queryField = document.getElementById("query");
     const radioButtons = document.getElementsByName("newsType");
-    let enableTextInput = false;
+    let enableTextInput = document.getElementById("everythingBtn").checked;
+    const form = document.getElementById("search-form");
+
+    form.addEventListener("reset", () => {
+      enableTextInput = false;
+      queryField.setAttribute("readonly", false);
+    });
     radioButtons.forEach((rb) =>
       rb.addEventListener("change", () => {
         enableTextInput = !enableTextInput;

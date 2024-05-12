@@ -203,7 +203,7 @@ app.get("/history", async (req, res) => {
   console.log("History Result: " + result);
   let table = "<table border = 'solid 1px'>";
   table += "<tr><th>Search History</th></tr>";
-  for (e of result) {
+  for (e of await result) {
     table += "<tr><td>" + e.query + "</td></tr>";
   }
   table += "</table>";
