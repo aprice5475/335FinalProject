@@ -14,5 +14,4 @@
 
 **To run app:**
 
-- `npm i`
 - `node newsAppServer.js`
