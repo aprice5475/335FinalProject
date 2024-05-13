@@ -10,9 +10,9 @@
 
 **API's Information:** [NewsAPI](https://newsapi.org/docs/get-started#search)
 
-## **Contact Email:** aprice16@terpmail.umd.edu
+**Contact Email:** aprice16@terpmail.umd.edu
 
-To run app:
+**To run app:**
 
 - `npm i`
 - `node newsAppServer.js`
