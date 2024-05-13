@@ -40,6 +40,10 @@ body {
 table {
   margin: 0 auto;
   font-size: larger;
+  width: 50%;
+}
+#search_col {
+  width: 40%;
 }
 table,
 th,

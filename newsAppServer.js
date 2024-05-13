@@ -29,7 +29,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 function getDate() {
-  return date.toLocaleDateString("EN-CA");
+  return date.toLocaleDateString("EN-US", { timeZone: "America/New_York" });
+}
+function getDateTime() {
+  return date.toLocaleString("EN-US", { timeZone: "America/New_York" });
 }
 function getCountry(countryCode) {
   switch (countryCode) {
@@ -179,6 +182,7 @@ app.post("/search", async (req, res) => {
   const { newsType, country, query } = req.body;
   let articles;
   let args;
+  let searchTime = getDate();
   if (newsType === "Everything") {
     articles = await getEverything(query);
     args = {
@@ -187,7 +191,7 @@ app.post("/search", async (req, res) => {
       results: articles,
     };
 
-    await updateHistory(query, date.toLocaleString("EN-US"));
+    await updateHistory(query, getDateTime());
     res.render("allArticles", args);
   } else {
     articles = await getTopHeadlines(country);
@@ -205,9 +209,9 @@ app.get("/history", async (req, res) => {
   result = result.reverse(); //get most recent entries first
   //console.log("History Result: " + result);
   let table = "<table>";
-  table += "<tr><th>Search</th><th>Time Searched</th></tr>";
+  table += "<tr><th id = 'search_col'>Search</th><th>Time Searched</th></tr>";
   for (e of result) {
-    table += "<tr><td>" + e.query + "</td>";
+    table += '<tr><td>"' + e.query + '"</td>';
     table += "<td>" + e.date + "</td></tr>";
   }
   table += "</table>";
