@@ -32,7 +32,7 @@ function getDate() {
   return date.toLocaleDateString("EN-US", { timeZone: "America/New_York" });
 }
 function getDateTime() {
-  return date.toLocaleString("EN-US", { timeZone: "America/New_York" });
+  return date.toUTCString();
 }
 function getCountry(countryCode) {
   switch (countryCode) {
