@@ -8,7 +8,7 @@
 
 **Youtube Video Link:** (https://youtu.be/Tbwr8EfZnHg)
 
-**API's Information:** [NewsAPI](https://newsapi.org/docs/get-started#search)
+**API's Information:** (https://newsapi.org/docs/get-started#search)
 
 **Contact Email:** (aprice16@terpmail.umd.edu)
 
