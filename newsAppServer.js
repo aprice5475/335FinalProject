@@ -187,7 +187,7 @@ app.post("/search", async (req, res) => {
       results: articles,
     };
 
-    await updateHistory(query, date.toLocaleString());
+    await updateHistory(query, date.toLocaleString("EN-US"));
     res.render("allArticles", args);
   } else {
     articles = await getTopHeadlines(country);
@@ -201,7 +201,8 @@ app.post("/search", async (req, res) => {
   }
 });
 app.get("/history", async (req, res) => {
-  const result = await getHistory();
+  let result = await getHistory();
+  result = result.reverse(); //get most recent entries first
   //console.log("History Result: " + result);
   let table = "<table>";
   table += "<tr><th>Search</th><th>Time Searched</th></tr>";
@@ -225,7 +226,7 @@ app.post("/clearHistory", async (req, res) => {
   res.redirect("/index");
 });
 
-const portNo = 5000;
+const portNo = 4000;
 const webServer = http.createServer(app);
 webServer.listen(portNo);
 process.stdout.write(
