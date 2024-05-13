@@ -1,6 +1,6 @@
 # News App
 
-**Submitted By:**
+**Submitted By:** Aaron Price
 
 **Group Members:** Aaron Price
 
