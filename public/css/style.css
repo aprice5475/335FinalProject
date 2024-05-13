@@ -1,6 +1,6 @@
 :root {
   --bg_clr: #222831;
-  --main_content_clr: #eeeeee;
+  --main_content_clr: #fdfdfd;
   --text_clr1: #2e323a;
   --text_clr2: #76abae;
   --text_clr3: #326ec9;
@@ -19,7 +19,7 @@
   font-optical-sizing: auto;
 }
 body {
-  background-image: url("/dark-blue-background-with-the-diamond-pattern-template-sr06012408-1704699724568-cover.webp");
+  background-image: url("/images/dark-blue-background-with-the-diamond-pattern-template-sr06012408-1704699724568-cover.webp");
   /* background-repeat: no-repeat; */
   background-size: cover;
   background-color: var(--bg_clr);
@@ -63,11 +63,14 @@ input[type="reset"] {
   padding: var(--button_padding);
   border-radius: var(--button_radius);
   border: var(--width_input_border);
+  font-weight: bold;
   font-size: var(--button_font_size);
+  opacity: 1;
 }
 input[type="text"] {
   border: var(--width_input_border);
   border-radius: var(--button_radius);
+  text-transform: none;
   width: 200px;
   height: 30px;
 }
@@ -92,5 +95,12 @@ select {
   color: var(--text_clr3);
   &:hover {
     color: gold;
+  }
+}
+#back_search {
+  font-size: x-large;
+  color: var(--text_clr3);
+  &:hover {
+    color: var(--text_clr2);
   }
 }

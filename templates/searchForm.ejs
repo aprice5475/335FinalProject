@@ -15,7 +15,7 @@
   <body>
     <div class="main_content">
       <h1>Search For News</h1>
-      <form id="search-form" action="/search" method="post">
+      <form id="search-form" action="/search" method="post" autocomplete="off">
         <fieldset>
           <label>
             <input
@@ -58,7 +58,7 @@
             <br />
             <label>
               <strong>Search: </strong>
-              <input type="text" name="query" id="query" />
+              <input type="text" name="query" id="query" readonly />
             </label>
           </div>
           <br />
@@ -74,14 +74,16 @@
     </div>
   </body>
   <script>
+    debugger;
     const queryField = document.getElementById("query");
     const radioButtons = document.getElementsByName("newsType");
-    let enableTextInput = document.getElementById("everythingBtn").checked;
     const form = document.getElementById("search-form");
+    const everythingBtn = document.getElementById("everythingBtn");
+    let enableTextInput = false;
 
     form.addEventListener("reset", () => {
       enableTextInput = false;
-      queryField.setAttribute("readonly", false);
+      queryField.setAttribute("readonly", true);
     });
     radioButtons.forEach((rb) =>
       rb.addEventListener("change", () => {
@@ -89,19 +91,16 @@
         if (enableTextInput) {
           queryField.removeAttribute("readonly");
         } else {
-          queryField.setAttribute("readonly", false);
+          queryField.setAttribute("readonly", true);
         }
-        console.log("flipped button");
       })
     );
     window.onsubmit = () => {
-      if (enableTextInput) {
-        if (queryField.value === "") {
-          window.alert("You must enter a search term.");
-          return false;
-        }
-        return true;
+      if (enableTextInput && queryField.value === "") {
+        window.alert("You must enter a search term.");
+        return false;
       }
+      return true;
     };
   </script>
 </html>

@@ -1,10 +1,10 @@
 process.stdin.setEncoding("utf8");
 
-const path = require("path");
 const express = require("express");
+const path = require("path");
 const http = require("http");
-const fs = require("fs");
 const bodyParser = require("body-parser");
+const favicon = require("serve-favicon");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const app = express();
 
@@ -20,14 +20,16 @@ const databaseAndCollection = {
   db: process.env.MONGO_DB_NAME,
   collection: process.env.MONGO_COLLECTION,
 };
+const date = new Date();
 
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 function getDate() {
-  return new Date().toLocaleDateString("EN-CA");
+  return date.toLocaleDateString("EN-CA");
 }
 function getCountry(countryCode) {
   switch (countryCode) {
@@ -95,7 +97,7 @@ async function getTopHeadlines(country) {
  * @returns every article related to the search query
  */
 async function getEverything(query) {
-  console.log(`${API_URL_EVERYTHING}q=${query}&apiKey=${process.env.API_KEY}`);
+  // console.log(`${API_URL_EVERYTHING}q=${query}&apiKey=${process.env.API_KEY}`);
   return await fetch(
     `${API_URL_EVERYTHING}q=${query}&apiKey=${process.env.API_KEY}`
   )
@@ -125,7 +127,7 @@ async function getHistory() {
     client.close();
   }
 }
-async function updateHistory(query) {
+async function updateHistory(query, dateTime) {
   const client = new MongoClient(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -136,7 +138,7 @@ async function updateHistory(query) {
     await client
       .db(databaseAndCollection.db)
       .collection(databaseAndCollection.collection)
-      .insertOne({ query: query });
+      .insertOne({ query: query, date: dateTime });
   } catch (error) {
     console.error(error);
   } finally {
@@ -185,7 +187,7 @@ app.post("/search", async (req, res) => {
       results: articles,
     };
 
-    await updateHistory(query);
+    await updateHistory(query, date.toLocaleString());
     res.render("allArticles", args);
   } else {
     articles = await getTopHeadlines(country);
@@ -193,18 +195,19 @@ app.post("/search", async (req, res) => {
       numOfResults: articles.length,
       country: getCountry(country),
       results: articles,
-      date: new Date().toLocaleDateString("EN-US"),
+      date: date.toLocaleDateString("EN-US"),
     };
     res.render("topHeadlines", args);
   }
 });
 app.get("/history", async (req, res) => {
   const result = await getHistory();
-  console.log("History Result: " + result);
-  let table = "<table border = 'solid 1px'>";
-  table += "<tr><th>Search History</th></tr>";
-  for (e of await result) {
-    table += "<tr><td>" + e.query + "</td></tr>";
+  //console.log("History Result: " + result);
+  let table = "<table>";
+  table += "<tr><th>Search</th><th>Time Searched</th></tr>";
+  for (e of result) {
+    table += "<tr><td>" + e.query + "</td>";
+    table += "<td>" + e.date + "</td></tr>";
   }
   table += "</table>";
   args = {
@@ -222,13 +225,13 @@ app.post("/clearHistory", async (req, res) => {
   res.redirect("/index");
 });
 
-const portNo = 4100;
+const portNo = 5000;
 const webServer = http.createServer(app);
 webServer.listen(portNo);
 process.stdout.write(
   `Web server started and running at http://localhost:${portNo}\n`
 );
-const msg = "Stop to shutdown the server: ";
+const msg = "Enter 'stop' to shutdown the server: ";
 process.stdout.write(msg);
 process.stdin.on("readable", () => {
   let dataInput = process.stdin.read();
@@ -236,10 +239,10 @@ process.stdin.on("readable", () => {
     let command = dataInput.trim();
     if (command.toLowerCase() === "stop") {
       webServer.close();
-      process.stdout.write("Shutting down server.");
+      process.stdout.write("Shutting down server.\nServer off. ");
       process.exit(0);
     } else {
-      process.stdout.write("Invalid command: " + command);
+      process.stdout.write("Invalid command: " + command + "\n");
     }
     process.stdout.write(msg);
     process.stdin.resume();
